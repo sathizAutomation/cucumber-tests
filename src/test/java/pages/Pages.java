@@ -1,36 +1,42 @@
 package pages;
 
+import com.github.javafaker.Faker;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
+import pages.NavigationMenu;
+import pages.RegistrationPage;
+import pages.SignInPage;
+import support.DBConnection;
+import support.Settings;
 
-import pages.bse.HistoricalDataPage;
-import pages.demoapp.NavigationMenu;
-import pages.demoapp.RegistrationPage;
-import pages.demoapp.SignInPage;
+import java.util.Random;
 
 
 public class Pages {
-	
+	public Settings settings = Settings.getInstance();
+	public DBConnection dbConnection = DBConnection.getInstance();
+	protected Faker random = new Faker();
 	protected NavigationMenu navigationMenu;
 	protected RegistrationPage registrationPage;
 	protected SignInPage signInPage;
-	protected HistoricalDataPage historicalDataPage;
 	
-	/**
-	 * 
-	 * Method Name : setPages
-	 * Return Type : void
-	 * Author      : VNatarajan
-	 * Date		   : Sep 29, 2017
-	 * Description : Set pages to be used for the tests
-	 * @return
-	 */
-	
-	public void setPages(WebDriver driver) {
+	public Pages(WebDriver driver) {
 		//Initialize the pages
+		signInPage = PageFactory.initElements(driver, SignInPage.class);
 		navigationMenu = PageFactory.initElements(driver, NavigationMenu.class);
 		registrationPage = PageFactory.initElements(driver, RegistrationPage.class);
-		signInPage = PageFactory.initElements(driver, SignInPage.class);
-		historicalDataPage = PageFactory.initElements(driver, HistoricalDataPage.class);
+
+	}
+
+	public static String randomNumber(int length) {
+		Random rand = new Random();
+		String  randomNo="";
+		for(int len = 1;len<=length;len++) {
+			randomNo = randomNo + (rand.nextInt(9) + 1);
+			if(randomNo.length()==length) {
+				return randomNo;
+			}
+		}
+		return "NOT_RANDOM";
 	}
 }

@@ -1,9 +1,6 @@
 package pages;
 
-import java.util.List;
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
-
+import com.github.javafaker.Faker;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -11,22 +8,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import com.github.javafaker.Faker;
-
 import support.DBConnection;
-import support.Log;
 import support.Settings;
+import java.util.List;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
-/**
- * 
- * @author         :VNatarajan
- * @since          :Sep 20, 2017
- * @filename       :PageSupporter.java
- * @version		   :1.0
- * @description    :The class to provide to common tests features.This needs to be extended by all page classes
- */
 public class PageSupporter {
+	public static Logger log = Logger.getLogger(PageSupporter.class.getName());
 	protected Settings settings = Settings.getInstance();
 	protected DBConnection dbConnection = new DBConnection();
 	WebDriverWait wait;
@@ -36,16 +26,14 @@ public class PageSupporter {
 		this.driver = driver;
 	}
 
-
-
 	/**
-	 * 
+	 *
 	 * Method Name : waitFor
 	 * Description : To wait for an element for a specified time
-	 * Author      : VNatarajan
+	 * Author      : Tester
 	 * Return Types: boolean
 	 * Paramters   : PageSupporter
-	 * Date        : Nov 6, 2017
+	 * Date        : Aug 15, 2021
 	 * Version     : 1.0
 	 */
 
@@ -60,10 +48,10 @@ public class PageSupporter {
 	}
 
 	/**
-	 * 
+	 *
 	 * Method Name : waitFor
 	 * Description : To wait for a list of elements for a specified time
-	 * Author      : VNatarajan
+	 * Author      : Tester
 	 * Return Types: boolean
 	 * Paramters   : PageSupporter
 	 * Date        : Nov 6, 2017
@@ -84,7 +72,7 @@ public class PageSupporter {
 	 * 
 	 * Method Name : timeout
 	 * Description : To set the implicit wait time by passing seconds as parameter
-	 * Author      : VNatarajan
+	 * Author      : Tester
 	 * Return Types: void
 	 * Paramters   : PageSupporter
 	 * Date        : Nov 6, 2017
@@ -99,7 +87,7 @@ public class PageSupporter {
 	 * 
 	 * Method Name : wait
 	 * Description : Wait for the given time period in seconds
-	 * Author      : VNatarajan
+	 * Author      : Tester
 	 * Return Types: void
 	 * Paramters   : PageSupporter
 	 * Date        : Nov 6, 2017
@@ -118,10 +106,10 @@ public class PageSupporter {
 	 * 
 	 * Method Name : waitUntil
 	 * Description : This 
-	 * Author      : VNatarajan
+	 * Author      : Tester
 	 * Return Types: void
 	 * Paramters   : element to wait for and how long to wait for
-	 * Date        : Nov 6, 2017
+	 * Date        : Aug 15, 2021
 	 * Version     : 1.0
 	 */
 
@@ -134,15 +122,14 @@ public class PageSupporter {
 		}
 	}
 
-
 	/**
 	 * 
 	 * Method Name : pageLoadWait
 	 * Description : Wait for the page to load
-	 * Author      : VNatarajan
+	 * Author      : Tester
 	 * Return Types: void
 	 * Paramters   : PageSupporter
-	 * Date        : Nov 6, 2017
+	 * Date        : Aug 15, 2021
 	 * Version     : 1.0
 	 */
 
@@ -171,14 +158,14 @@ public class PageSupporter {
 	 * 
 	 * Method Name : randomNumber
 	 * Description : This generates the random number,by taking the length of that number as parameter
-	 * Author      : VNatarajan
+	 * Author      : Tester
 	 * Return Types: String
 	 * Parameters   : Length of the random random number
-	 * Date        : Nov 6, 2017
+	 * Date        : Aug 15, 2021
 	 * Version     : 1.0
 	 */
 
-	public String randomNumber(int length) {
+	public static String randomNumber(int length) {
 		Random rand = new Random();
 		String  randomNo="";
 		for(int len = 1;len<=length;len++) {
@@ -202,10 +189,10 @@ public class PageSupporter {
 	 * 
 	 * Method Name : scrollToElement
 	 * Description : This scrolls the focus to the element being passed as the parameter
-	 * Author      : VNatarajan
+	 * Author      : Tester
 	 * Return Types: void
 	 * Parameters   : element 
-	 * Date        : Nov 6, 2017
+	 * Date        : Aug 15, 2021
 	 * Version     : 1.0
 	 */
 
@@ -222,10 +209,10 @@ public class PageSupporter {
 	 * 
 	 * Method Name : scrollToElement
 	 * Description : This scrolls the focus to the element being passed as the parameter and offset the height by scrolling up
-	 * Author      : VNatarajan
+	 * Author      : Tester
 	 * Return Types: void
 	 * Paramters   : PageSupporter
-	 * Date        : Nov 6, 2017
+	 * Date        : Aug 15, 2021
 	 * Version     : 1.0
 	 */
 
@@ -242,10 +229,10 @@ public class PageSupporter {
 	 * 
 	 * Method Name : switchToNewWindow
 	 * Description : This method switch the focus to newly opened window.
-	 * Author      : VNatarajan
+	 * Author      : Tester
 	 * Return Types: void
 	 * Paramters   : PageSupporter
-	 * Date        : Nov 6, 2017
+	 * Date        : Aug 15, 2021
 	 * Version     : 1.0
 	 */
 
@@ -261,10 +248,10 @@ public class PageSupporter {
 	 * 
 	 * Method Name : switchToParentWindow
 	 * Description : It changes focus to parent window
-	 * Author      : VNatarajan
+	 * Author      : Tester
 	 * Return Types: void
 	 * Paramters   : PageSupporter
-	 * Date        : Nov 6, 2017
+	 * Date        : Aug 15, 2021
 	 * Version     : 1.0
 	 */
 
@@ -280,10 +267,10 @@ public class PageSupporter {
 	 * 
 	 * Method Name : switchToParentWindow
 	 * Description : It changes focus to parent window
-	 * Author      : VNatarajan
+	 * Author      : Tester
 	 * Return Types: void
 	 * Paramters   : PageSupporter
-	 * Date        : Nov 6, 2017
+	 * Date        : Aug 15, 2021
 	 * Version     : 1.0
 	 */
 	
@@ -299,10 +286,10 @@ public class PageSupporter {
 	 * 
 	 * Method Name : switchToParentWindow
 	 * Description : It changes focus to parent window
-	 * Author      : VNatarajan
+	 * Author      : Tester
 	 * Return Types: void
 	 * Paramters   : PageSupporter
-	 * Date        : Nov 6, 2017
+	 * Date        : Aug 15, 2021
 	 * Version     : 1.0
 	 */
 	
@@ -315,16 +302,14 @@ public class PageSupporter {
 		}
 	}
 
-
-	
 	/**
 	 * 
 	 * Method Name : selectDropdownByValue
 	 * Description : It selects drop down values given the value of the dropdown
-	 * Author      : VNatarajan
+	 * Author      : Tester
 	 * Return Types: void
 	 * Paramters   : PageSupporter
-	 * Date        : Nov 6, 2017
+	 * Date        : Aug 15, 2021
 	 * Version     : 1.0
 	 */
 	
@@ -337,20 +322,15 @@ public class PageSupporter {
 	 * 
 	 * Method Name : selectDropdownByVisibleText
 	 * Description : It selects drop down values given the visible text of the dropdown
-	 * Author      : VNatarajan
+	 * Author      : Tester
 	 * Return Types: void
 	 * Paramters   : PageSupporter
-	 * Date        : Nov 6, 2017
+	 * Date        : Aug 15, 2021
 	 * Version     : 1.0
 	 */
 	
 	public void selectDropdownByVisibleText(WebElement element,String text) {
 		Select select = new Select(element);
 		select.selectByVisibleText(text);
-	}
-
-
-	public synchronized static Log getLogger() {
-		return new Log();
 	}
 }
