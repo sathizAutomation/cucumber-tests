@@ -1,5 +1,6 @@
 package support;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -29,10 +30,9 @@ public class UiDriver {
 				 options.addArguments("--disable-notifications");  
 				 DesiredCapabilities cap = DesiredCapabilities.chrome();  
 				 cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);  
-				 cap.setCapability(ChromeOptions.CAPABILITY, options);  
-				 String chromeDriver=Settings.getInstance().getDriverEXEDir()+"chromedriver";
-				 System.setProperty("webdriver.chrome.driver", chromeDriver);
-				 wDriver = new ChromeDriver(options);  
+				 cap.setCapability(ChromeOptions.CAPABILITY, options);
+				 WebDriverManager.chromedriver().setup();
+				 wDriver = new ChromeDriver(options);
 			}
 
 			else if(driver.equalsIgnoreCase("IE")) {
@@ -50,8 +50,7 @@ public class UiDriver {
 			}
 
 			else {
-				String geckoDriver1=Settings.getInstance().getDriverEXEDir()+"geckodriver.exe";
-				System.setProperty("webdriver.gecko.driver", geckoDriver1);
+				WebDriverManager.firefoxdriver().setup();
 				wDriver = new FirefoxDriver();
 				return wDriver;
 			}
