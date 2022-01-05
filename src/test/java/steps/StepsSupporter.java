@@ -14,6 +14,7 @@ import support.Configurations;
 import support.Settings;
 import support.UiDriver;
 import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -38,7 +39,7 @@ public class StepsSupporter {
         //instantiate the driver instance
         driver = uidriver.getDriver(browserName);
         //browser initial set ups
-        log.log(Level.INFO,"The browser is launched for the execution!");
+        log.log(Level.INFO, "The browser is launched for the execution!");
         driver.manage().window().maximize();
         driver.manage().timeouts().pageLoadTimeout(600, TimeUnit.SECONDS);
         driver.get(appURL);
@@ -62,22 +63,26 @@ public class StepsSupporter {
     @After
     public void cleanUp() {
         driver.quit();
-        log.log(Level.INFO,"The browser is closed after the execution!");
+        log.log(Level.INFO, "The browser is closed after the execution!");
     }
 
-
-    public static void createHistoricalReport() {
-        String path = new File(System.getProperty("user.dir")).getAbsolutePath() + System.getProperty("file.separator") +
-                "reports" + System.getProperty("file.separator");
-        String srcFile = "GTMS_TestExecutionSummary.html";
+    /*Method to take backup of previous report*/
+    public void createBackupReportDirectory() {
+        String reportPath = settings.getReportsDir();
+        String history = settings.getReportsDir() + "Historical Reports";
+        new File("history").mkdirs();
         Date dNow = new Date();
-        SimpleDateFormat ft = new SimpleDateFormat("yyyyMMddhhmmss");
+        SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd-hhmmss");
         String datetime = ft.format(dNow);
-        String destFile = "CTMS_TestExecutionSummary_" + datetime + ".html";
+        String executionDir = history + System.getProperty("file.separator") + "Execution_" + datetime;
+        String TestSummaryReport = history + System.getProperty("file.separator") + "Execution_" + datetime + System.getProperty("file.separator") + "TestSummaryReport.html";
+        new File(executionDir).mkdirs();
         try {
-            FileUtils.copyFile(new File(path + srcFile), new File(path + destFile));
+            FileUtils.copyFileToDirectory(new File(reportPath + "TestSummaryReport.html"), new File(executionDir), false);
+            FileUtils.copyDirectory(new File(reportPath + "cucumber-html-reports"), new File(executionDir), false);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 }

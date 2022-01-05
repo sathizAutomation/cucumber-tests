@@ -77,6 +77,17 @@ public class Settings {
 		this.resourcesDir = getProjectPath()+System.getProperty("file.separator")+"resources"+System.getProperty("file.separator");
 	}
 
+	public String getReportsDir() {
+		if(resourcesDir==null){
+			setReportsDir();
+		}
+		return resourcesDir;
+	}
+
+	public void setReportsDir() {
+		this.resourcesDir = getProjectPath()+System.getProperty("file.separator")+"report"+System.getProperty("file.separator");
+	}
+
 	public String getDriverEXEDir() {
 		if(driverEXEDir==null){
 			setDriverEXEDir();
