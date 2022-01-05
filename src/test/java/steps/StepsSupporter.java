@@ -72,7 +72,7 @@ public class StepsSupporter {
         String history = settings.getReportsDir() + "Historical Reports";
         new File("history").mkdirs();
         Date dNow = new Date();
-        SimpleDateFormat ft = new SimpleDateFormat("yyyyMMddhhmmss");
+        SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd-hhmmss");
         String datetime = ft.format(dNow);
         String executionDir = history + System.getProperty("file.separator") + "Execution_" + datetime;
         String TestSummaryReport = history + System.getProperty("file.separator") + "Execution_" + datetime + System.getProperty("file.separator") + "TestSummaryReport.html";
